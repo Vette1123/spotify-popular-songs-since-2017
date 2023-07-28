@@ -1,37 +1,22 @@
-import Link from 'next/link'
+import { supabase } from '@/lib/db'
+import BlurredImage from '@/components/blurred-image'
 
-import { siteConfig } from '@/config/site'
-import { buttonVariants } from '@/components/ui/button'
+export default async function IndexPage() {
+  let { data: spotify } = await supabase
+    .from('spotify')
+    .select('*')
+    .order('addedAT', { ascending: false })
+    .limit(300)
 
-export default function IndexPage() {
   return (
-    <section className="container grid items-center gap-6 pb-8 pt-6 md:py-10">
-      <div className="flex max-w-[980px] flex-col items-start gap-2">
-        <h1 className="text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
-          Sadge Next.js Starter Template
-        </h1>
-        <p className="max-w-[700px] text-lg text-muted-foreground">
-          A Next.js starter template with TypeScript, Tailwind CSS, and more.
-        </p>
+    <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
+      <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
+        {spotify ? (
+          spotify?.map((image) => <BlurredImage key={image.id} image={image} />)
+        ) : (
+          <p>Nothing to see here</p>
+        )}
       </div>
-      <div className="flex gap-4">
-        <Link
-          href={siteConfig.links.github}
-          target="_blank"
-          rel="noreferrer"
-          className={buttonVariants()}
-        >
-          Sadge
-        </Link>
-        <Link
-          target="_blank"
-          rel="noreferrer"
-          href={siteConfig.links.github}
-          className={buttonVariants({ variant: 'outline' })}
-        >
-          GitHub
-        </Link>
-      </div>
-    </section>
+    </div>
   )
 }
