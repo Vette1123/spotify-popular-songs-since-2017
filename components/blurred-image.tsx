@@ -25,10 +25,10 @@ function BlurredImage({ image }: { image: SpotifyRow }) {
           onLoadingComplete={() => setLoading(false)}
         />
       </div>
-      <h3 className="mt-4 text-sm text-gray-700">
+      <h3 className="mt-4 text-sm text-gray-700 dark:text-gray-300">
         {image.trackName as string}
       </h3>
-      <p className="mt-1 text-lg font-medium text-gray-900">
+      <p className="mt-1 text-lg font-medium text-gray-900 dark:text-gray-600">
         {image.artistName as string}
       </p>
     </a>
