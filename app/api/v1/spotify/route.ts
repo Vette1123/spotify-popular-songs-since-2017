@@ -9,22 +9,28 @@ export async function POST(request: NextRequest) {
       status: 400,
     })
 
-  const { offset } = await request.json()
+  const { offset, searchParam } = await request.json()
 
-  if (!offset)
+  if (!offset && offset !== 0)
     return new NextResponse(JSON.stringify({ message: 'No offset provided' }), {
       status: 400,
     })
 
-  const from = offset * PAGE_COUNT
-  const to = from + PAGE_COUNT - 1
+  const from = offset * (searchParam ? 100 : PAGE_COUNT)
+  const to = from + (searchParam ? 100 : PAGE_COUNT) - 1
 
   try {
-    const { data: spotify, error } = await supabase
+    const query = supabase
       .from('spotify')
       .select('*')
       .range(from, to)
       .order('addedAT', { ascending: false })
+
+    if (searchParam) {
+      query.ilike('artistName', `%${searchParam}%`)
+    }
+
+    const { data: spotify, error } = await query
 
     if (error)
       return new NextResponse(JSON.stringify({ message: error.message }), {

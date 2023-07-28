@@ -1,6 +1,7 @@
 import '@/styles/globals.css'
 
 import type { Metadata } from 'next'
+import { QueryProvider } from '@/providers/react-query-provider'
 import { ThemeProvider } from '@/providers/theme-provider'
 
 import { siteConfig } from '@/config/site'
@@ -43,7 +44,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <div className="relative flex min-h-screen flex-col">
               <SiteHeader />
-              <div className="flex-1">{children}</div>
+              <QueryProvider>
+                <div className="flex-1">{children}</div>
+              </QueryProvider>
             </div>
           </ThemeProvider>
         </body>
