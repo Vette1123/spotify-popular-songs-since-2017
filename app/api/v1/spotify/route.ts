@@ -16,8 +16,8 @@ export async function POST(request: NextRequest) {
       status: 400,
     })
 
-  const from = offset * (searchParam ? 100 : PAGE_COUNT)
-  const to = from + (searchParam ? 100 : PAGE_COUNT) - 1
+  const from = offset * (searchParam ? 200 : PAGE_COUNT)
+  const to = from + (searchParam ? 200 : PAGE_COUNT) - 1
 
   try {
     const query = supabase
