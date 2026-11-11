@@ -10,7 +10,7 @@
 
 ### 🚀 [Try it live →](https://image-infinite-scroll.vercel.app)
 
-A practice project exploring scroll-driven pagination against a real dataset. Track artwork lives in a Supabase Postgres table and is fetched in pages of 20 from a Next.js Route Handler — when the container's bottom hits the viewport, the next offset loads. Searching by artist switches to a wider range query (200 rows) and resets the feed.
+A practice project exploring scroll-driven pagination against a real dataset. Track artwork lives in a Supabase Postgres table and is fetched in pages of 20 from a Next.js Route Handler. When the container's bottom hits the viewport, the next offset loads. Searching by artist switches to a wider range query (200 rows) and resets the feed.
 
 ## ✨ Features
 
